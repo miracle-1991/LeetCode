@@ -1,0 +1,44 @@
+//C++写法
+class Solution {
+public:
+    vector<int> sortArrayByParity(vector<int>& A) {
+            int lo = -1;
+            int hi =  A.size();
+            while (true) {
+                    while (A[++lo]%2 == 0) { if (lo == A.size()-1) break; }
+                    while (A[--hi]%2 == 1) { if (hi == 0) break; }
+                    if (hi <= lo ) break; 
+                    swap(A[lo], A[hi]);
+            }
+            return A;
+    }
+};
+
+//Golang写法
+func sortArrayByParity(A []int) []int {
+        if len(A) < 2 {
+                return A;        
+        }
+        
+        lo := 0;
+        hi := len(A) - 1;
+        for {
+                for A[lo] % 2 == 0 {
+                        lo++;
+                        if lo == len(A)-1 {
+                                break;
+                        }
+                }
+                for A[hi] % 2 == 1 {
+                        hi--;
+                        if hi == 0 {
+                                break; 
+                        }
+                }
+                if hi <= lo { 
+                        break
+                }
+                A[lo], A[hi] = A[hi], A[lo];
+        }
+        return A;
+}
