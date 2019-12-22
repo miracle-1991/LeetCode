@@ -1,0 +1,41 @@
+//C++代码
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+            int lo = 0;
+            int hi = nums.size() - 1;
+            while (lo < hi) {
+                    int mid = lo + (hi - lo)/2;
+                    if (target <= nums[mid]) {
+                           hi = mid;
+                    }else {
+                            lo = mid + 1;
+                    }
+            }
+            
+            if (lo == nums.size() - 1 && nums[lo] < target) {
+                    return nums.size();
+            }
+           
+            return lo;
+    }
+};
+
+//Golang代码
+func searchInsert(nums []int, target int) int {
+        lo := 0;
+        hi := len(nums) - 1;
+        for ; lo < hi ; {
+                mid := lo + (hi - lo)/2;
+                if (target <= nums[mid]) {
+                        hi = mid;
+                }else {
+                        lo = mid + 1;
+                }
+        }
+        
+        if (lo == len(nums)-1 && nums[lo] < target) {
+                return len(nums);
+        }
+        return lo;
+}
