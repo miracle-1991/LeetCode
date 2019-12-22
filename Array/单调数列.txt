@@ -1,0 +1,49 @@
+//C++代码
+class Solution {
+public:
+    bool isMonotonic(vector<int>& A) {
+            bool ret = true;
+            if (A.front() <= A.back()) {
+                    //单调递增
+                    for (int i = 0; i < A.size() - 1; i++) {
+                            if (A[i+1] < A[i]) {
+                                    ret = false;
+                                    break;
+                            }
+                    }
+            }else {
+                    //单调递减
+                    for (int i = 0; i < A.size() - 1; i++) {
+                            if (A[i+1] > A[i]) {
+                                    ret = false;
+                                    break;
+                            }
+                    }
+            }
+            
+            return ret;
+    }
+};
+
+//Golang代码
+func isMonotonic(A []int) bool {
+        ret := true;
+        if A[0] <= A[len(A)-1] {
+                //单调递增
+                for i := 0; i < len(A)-1; i++ {
+                        if A[i+1] < A[i]  {
+                                ret = false;
+                                break;
+                        }
+                }
+        }else {
+                //单调递减
+                for i := 0; i < len(A)-1; i++ {
+                        if A[i+1] > A[i] {
+                                ret = false;
+                                break;
+                        }
+                }
+        }
+        return ret;
+}
