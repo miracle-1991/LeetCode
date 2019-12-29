@@ -1,0 +1,62 @@
+//C++代码
+class Solution {
+public:
+    vector<int> sumEvenAfterQueries(vector<int>& A, vector<vector<int>>& queries) {
+            vector<int> ans;
+            int ASum = 0;
+            for (int i = 0; i < A.size(); i++) {
+                    if (A[i] % 2 == 0) {
+                        ASum += A[i];
+                    }
+            }
+            
+            for (auto& item : queries) {
+                    int val = item.front();
+                    int key = item.back();
+                    if (A[key] % 2 != 0) {
+                            if ((A[key] + val) % 2 == 0) {
+                                    ASum += A[key] + val;
+                            }
+                    }else {
+                            if ((A[key] + val) % 2 != 0) {
+                                    ASum -= A[key];
+                            }else {
+                                    ASum += val;
+                            }
+                    }
+                    A[key] += val;
+                    ans.push_back(ASum);
+            }
+            return ans;
+    }
+};
+
+//golang代码
+func sumEvenAfterQueries(A []int, queries [][]int) []int {
+        ASum := 0;
+        for _, v := range A {
+                if v % 2 == 0 {
+                        ASum += v;
+                } 
+        }
+        
+        ret := make([]int,0);
+        for _,item := range queries {
+                val := item[0];
+                key := item[1];
+                if A[key] %2 != 0 {
+                        if  (A[key] + val) % 2 == 0 {
+                                ASum = ASum + A[key] + val;                                
+                        }
+                }else {
+                        if (A[key] + val) % 2 != 0 {
+                                ASum = ASum - A[key];
+                        }else {
+                                ASum = ASum + val;
+                        }
+                }
+                A[key] = A[key] + val;
+                ret = append(ret, ASum);
+        }
+        return ret;
+}
