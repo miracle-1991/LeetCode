@@ -1,0 +1,22 @@
+//c++代码
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& A) {
+            vector<int> ret;
+            for (int i : A) {
+                    ret.push_back(i*i);
+            }
+            sort(ret.begin(), ret.end());
+            return ret;
+    }
+};
+
+//golang代码
+func sortedSquares(A []int) []int {
+        ret := make([]int, len(A));
+        for i, v := range A {
+                ret[i] = v*v;
+        }
+        sort.Ints(ret);
+        return ret;
+}
