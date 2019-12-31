@@ -1,0 +1,41 @@
+//c++
+class Solution {
+public:
+    vector<int> addToArrayForm(vector<int>& A, int K) {
+        vector<int> ans;
+        int i = A.size();
+        int n = K;
+        while (--i >= 0 || n > 0) {
+            if (i >= 0) { 
+                n += A[i];
+            }
+            ans.push_back(n % 10);
+            n /= 10;
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
+
+//golang
+func addToArrayForm(A []int, K int) []int {
+    var ans []int;
+    i := len(A);
+    n := K;
+    for (i > 0 || n > 0) {
+        i--;
+        if i >= 0 {
+            n += A[i];
+        }
+        ans = append(ans, n%10);
+        n /= 10;
+    }
+    return reverse(ans);
+}
+
+func reverse(s []int) []int {
+    for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+        s[i], s[j] = s[j], s[i];
+    }
+    return s;
+}
