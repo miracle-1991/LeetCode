@@ -1,0 +1,41 @@
+//c++代码
+
+//golang代码
+func numRookCaptures(board [][]byte) int {
+        ret := 0;
+        flag := false;
+        for x := 0; x < 8; x++ {
+                for y := 0; y < 8; y++ {
+                        if board[x][y] == 'R' { 
+                                ret = getStep(board, x, y);
+                                flag = true;
+                                break;
+                        }
+                }
+                
+                if flag {
+                        break;
+                }
+        }
+        return ret;
+}
+
+func getStep(arr [][]byte, x int, y int) int {
+        step := [][]int{{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+        
+        ret := 0;
+        for _, item := range step {
+                dx := x + item[0];
+                dy := y + item[1];
+                for  {
+                        if dx < 0 || dx >= 8 {break;}
+                        if dy < 0 || dy >= 8 {break;}
+                        if arr[dx][dy] == 'R' {break;}
+                        if arr[dx][dy] == 'B' {break;}
+                        if arr[dx][dy] == 'p' { ret++; break; }
+                        dx += item[0];
+                        dy += item[1];
+                }
+        }
+        return ret;
+}
