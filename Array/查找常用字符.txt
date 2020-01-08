@@ -1,0 +1,30 @@
+//c++代码
+class Solution {
+public:
+    vector<string> commonChars(vector<string>& A) {
+        int num[100][26] = {0};
+        for (int i = 0; i < A.size(); i++) {
+            for (int j = 0; j < A[i].size(); j++) {
+                num[i][A[i][j] - 'a']++;
+            }
+        }
+
+        for (int j = 0; j < 26; j++) {
+            for (int i = 1; i < A.size(); i++) {
+                num[0][j] = std::min(num[0][j], num[i][j]);
+            }
+        }
+
+        vector<string> ret;
+        string s;
+        for (int j = 0; j < 26; j++) {
+            while (num[0][j]--) {
+                s.clear();
+                s.push_back((char)(j + 'a'));
+                ret.push_back(s);
+            }
+        }
+
+        return ret;
+    }
+};
