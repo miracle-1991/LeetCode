@@ -28,3 +28,35 @@ public:
         return ret;
     }
 };
+
+
+//golang写法
+func commonChars(A []string) []string {
+    var arr [100][26]int;
+    for i, a := range A {
+        for _, c := range a {
+            arr[i][c - 'a']++;
+        }
+    }
+
+    for j := 0; j < 26; j++ {
+        for i := 1; i < len(A); i++ {
+            if arr[i][j] < arr[0][j] {
+                arr[0][j] = arr[i][j];
+            }
+        }
+    }
+
+    var ret []string;
+    for j := 0; j < 26; j++ {
+        for {
+            if arr[0][j] <= 0 {
+                break;
+            }
+            s := rune('a' + j);
+            ret = append(ret, string(s));
+            arr[0][j]--;
+        }
+    }
+    return ret;
+}
