@@ -1,0 +1,54 @@
+//c++代码
+class Solution {
+public:
+    int countCharacters(vector<string>& words, string chars) {
+        map<char, int> cmap;
+        for (char c : chars) {
+            cmap[c]++;
+        }
+
+        int len = 0;
+        for (string& s : words) {
+            map<char, int> tmap(cmap);
+            int i = 0;
+            for (i = 0; i < s.size(); i++) {
+                auto iter = tmap.find(s[i]);
+                if (iter == tmap.end()) { break; }
+                if (iter->second == 0) { break; }
+                iter->second--;
+            }
+            if (i == s.size()) { len += i; }
+        } 
+        return len;
+    }
+};
+
+//golang代码
+func countCharacters(words []string, chars string) int {
+    cmap := make(map[rune]int);
+    for _, v := range chars {
+        cmap[v]++;
+    }
+
+    ret := 0;
+    for _, s := range words {
+        tmap := make(map[rune]int);
+        for index, value := range cmap {
+            tmap[index] = value;
+        }
+
+        i := 0;
+        r := []rune(s);
+        for i = 0; i < len(r); i++ {
+            n, ok := tmap[r[i]];
+            if (!ok || n == 0) {
+                break;
+            }
+            tmap[r[i]]--;
+        }
+        if (i == len(r)) {
+            ret += i;
+        }
+    }
+    return ret;
+}
